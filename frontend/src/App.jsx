@@ -1,82 +1,83 @@
 // React, React router DOM
 import React, { useEffect } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
-import AccountTransactions from './pages/AccountTransactions'
-import PropTypes from 'prop-types'
+import Transactions from './pages/Transactions'
+import Nav from './components/Nav'
+import Footer from './components/Footer'
+
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
 import { tokenSlice } from './features/slices/tokenSlice'
 import { profileSlice } from './features/slices/profileSlice'
-// API
+// import { accountsSlice } from './features/slices/accountsSlice'
 import { getProfile } from './features/api/apiCalls'
 
 function App () {
   const dispatch = useDispatch()
-  const token = useSelector((state) => state.token.value)
-  const profile = useSelector(state => state.profile.value)
+  const token = useSelector(state => state.token.value)
+  // const profile = useSelector(state => state.profile.value)
 
-  function useAuth () {
-    return token && profile
-  }
-
-  function ProtectedRoute ({ children }) {
-    ProtectedRoute.propTypes = {
-      children: PropTypes.function
-    }
-    const auth = useAuth()
-    return auth ? children : <Navigate to='../login'/>
-  }
-
-  async function fetchAndStoreProfile (userToken) {
+  async function fetchAndDispatchProfile (userToken) {
     const getProfileResponse = await getProfile(userToken)
     if (getProfileResponse.status === 200) {
       const profile = getProfileResponse.body
       dispatch(profileSlice.actions.saveProfile(profile))
     }
   }
+
+  /*   async function fetchAndDispatchAccounts (userId) {
+    const getAccountsResponse = await getMockedAccounts(userId)
+    if (getAccountsResponse.status === 200) {
+      const accounts = getAccountsResponse.body
+      dispatch(accountsSlice.actions.saveAccounts(accounts))
+    }
+  } */
+
   async function resumeSession () {
-    const localStorageToken = window.localStorage.argentBankToken
-    const cookieToken = document.cookie
-    const token = localStorageToken + cookieToken
-    if (localStorageToken && cookieToken) {
+    if (window.localStorage.argentBankToken && document.cookie) {
+      const cookieToken = document.cookie
+      const localStoragePayloadJSON = JSON.parse(window.localStorage.argentBankToken)
+      const localStorageToken = localStoragePayloadJSON.token
+      const localStorageExpiration = new Date(localStoragePayloadJSON.expiration)
+
+      if (Date.now() > localStorageExpiration) {
+        console.log('token has expired')
+        return
+      }
+      const token = localStorageToken + cookieToken
       dispatch(tokenSlice.actions.saveToken(token))
-      await fetchAndStoreProfile(token)
+      if (token) {
+        await fetchAndDispatchProfile(token)
+        // await fetchAndDispatchAccounts(profile.id)
+      }
     }
   }
 
   useEffect(() => {
     resumeSession()
-  }, [])
+  }, [token])
 
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />}>
-          </Route>
-          <Route path='/login' element={<Login />}>
-          </Route>
-          <Route
-            path='/dashboard'
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          >
-          </Route>
-          <Route
-            path='/account/:id'
-            element={
-              <ProtectedRoute>
-                <AccountTransactions />
-              </ProtectedRoute>
-          }>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <>
+        <BrowserRouter>
+        <Nav />
+          <Routes>
+            <Route path='/' element={<Home />}>
+            </Route>
+            <Route path='/login' element={<Login />}>
+            </Route>
+            <Route path='/dashboard' element={<Dashboard />}>
+            </Route>
+            <Route
+              path='/account/:id' element={<Transactions />}>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        <Footer />
+      </>
   )
 }
 

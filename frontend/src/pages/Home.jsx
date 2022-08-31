@@ -1,15 +1,12 @@
 import React from 'react'
-import Nav from '../components/nav/Nav'
 /* import SliderPicture from '../assets/bank-tree.jpeg' */
 import ChatIcon from '../assets/icon-chat.png'
 import MoneyIcon from '../assets/icon-money.png'
 import SecurityIcon from '../assets/icon-security.png'
-import Footer from '../components/Footer'
 
 const Home = () => {
   return (
     <div className="home">
-      {<Nav />}
       <main>
         <div className='home-slider'>
           <div className='home-slider__claims'>
@@ -37,7 +34,6 @@ const Home = () => {
           </article>
         </section>
       </main>
-      {<Footer />}
     </div>
   )
 }

@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const accountSlice = createSlice({
+export const accountsSlice = createSlice({
   name: 'account',
   initialState: {
     value: undefined
   },
   reducers: {
-    saveDetails: (state, action) => {
+    saveAccounts: (state, action) => {
       state.value = action.payload
     },
     deleteDetails: (state) => {
@@ -15,6 +15,6 @@ export const accountSlice = createSlice({
   }
 })
 
-export const { saveDetails, deleteDetails } = accountSlice.actions
+export const { saveAccounts, deleteDetails } = accountsSlice.actions
 
-export default accountSlice.reducer
+export default accountsSlice.reducer

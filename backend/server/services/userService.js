@@ -45,7 +45,7 @@ module.exports.getUserProfile = async serviceData => {
 }
 
 module.exports.loginUser = async serviceData => {
-  console.log(serviceData)
+  console.log('userService: ', serviceData)
   try {
     const user = await User.findOne({ email: serviceData.email })
 
@@ -58,8 +58,7 @@ module.exports.loginUser = async serviceData => {
     if (!isValid) {
       throw new Error('Password is invalid')
     }
-/*     const saltRounds = 10
-    const xsrfToken = bcrypt.hash('xsfrtoken', saltRounds) */
+
     const token = jwt.sign(
       { id: user._id },
       process.env.SECRET_KEY || 'default-secret-key',

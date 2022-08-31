@@ -1,4 +1,4 @@
-export const accountsOverviewData = [
+const userAccounts = [
   {
     id: '62ffdc07d3bc84a50caf4d3b',
     accounts: [
@@ -6,10 +6,56 @@ export const accountsOverviewData = [
         accountId: 8349,
         accountTitle: 'Argent Bank Checking (x8349)',
         accountBalance: '$2,082.79',
-        accountDescription: "Tony's Available Balance",
-        accountTransactions: [
+        accountDescription: "Tony's Available Balance"
+      },
+      {
+        accountId: 8350,
+        accountTitle: 'Argent Bank Savings (x8350)',
+        accountBalance: '$10,928.42',
+        accountDescription: "Tony's Available Balance"
+      },
+      {
+        accountId: 8351,
+        accountTitle: 'Argent Bank Credit Card (x8351)',
+        accountBalance: '$184.30',
+        accountDescription: "Tony's Available Balance"
+      }
+    ]
+  },
+  {
+    id: '62ffdc07d3bc84a50caf4d3c',
+    accounts: [
+      {
+        accountId: 7241,
+        accountTitle: 'Argent Bank Checking (x7241)',
+        accountBalance: '$3,159.30',
+        accountDescription: "Steve's Available Balance"
+      },
+      {
+        accountId: 7242,
+        accountTitle: 'Argent Bank Savings (x7242)',
+        accountBalance: '$22,144.42',
+        accountDescription: "Steve's Available Balance"
+      },
+      {
+        accountId: 7243,
+        accountTitle: 'Argent Bank Credit Card (x7243)',
+        accountBalance: '$599.00',
+        accountDescription: "Steve's Available Balance"
+      }
+    ]
+  }
+]
+
+const userTransactions = [
+  {
+    userId: '62ffdc07d3bc84a50caf4d3b',
+    accounts: [
+      {
+        accountId: 8349,
+        transactions: [
           {
-            id: 1,
+            transactionId: 1,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -19,7 +65,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 2,
+            transactionId: 2,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -29,7 +75,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 3,
+            transactionId: 3,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -39,7 +85,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 4,
+            transactionId: 4,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -49,7 +95,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 5,
+            transactionId: 5,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -59,7 +105,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 6,
+            transactionId: 6,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -72,12 +118,9 @@ export const accountsOverviewData = [
       },
       {
         accountId: 8350,
-        accountTitle: 'Argent Bank Savings (x8350)',
-        accountBalance: '$10,928.42',
-        accountDescription: "Tony's Available Balance",
-        accountTransactions: [
+        transactions: [
           {
-            id: 1,
+            transactionId: 1,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -87,7 +130,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 2,
+            transactionId: 2,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -97,7 +140,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 3,
+            transactionId: 3,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -107,7 +150,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 4,
+            transactionId: 4,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -117,7 +160,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 5,
+            transactionId: 5,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -127,7 +170,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 6,
+            transactionId: 6,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -140,12 +183,9 @@ export const accountsOverviewData = [
       },
       {
         accountId: 8351,
-        accountTitle: 'Argent Bank Credit Card (x8351)',
-        accountBalance: '$184.30',
-        accountDescription: "Tony's Available Balance",
-        accountTransactions: [
+        transactions: [
           {
-            id: 1,
+            transactionId: 1,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -155,7 +195,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 2,
+            transactionId: 2,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -165,7 +205,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 3,
+            transactionId: 3,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -175,7 +215,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 4,
+            transactionId: 4,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -185,7 +225,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 5,
+            transactionId: 5,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -195,7 +235,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 6,
+            transactionId: 6,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -209,16 +249,13 @@ export const accountsOverviewData = [
     ]
   },
   {
-    id: '62ffdc07d3bc84a50caf4d3c',
+    userId: '62ffdc07d3bc84a50caf4d3c',
     accounts: [
       {
         accountId: 7241,
-        accountTitle: 'Argent Bank Checking (x7241)',
-        accountBalance: '$3,159.30',
-        accountDescription: "Steve's Available Balance",
-        accountTransactions: [
+        transactions: [
           {
-            id: 1,
+            transactionId: 1,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -228,7 +265,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 2,
+            transactionId: 2,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -238,7 +275,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 3,
+            transactionId: 3,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -248,7 +285,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 4,
+            transactionId: 4,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -258,7 +295,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 5,
+            transactionId: 5,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -268,7 +305,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 6,
+            transactionId: 6,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -281,12 +318,9 @@ export const accountsOverviewData = [
       },
       {
         accountId: 7242,
-        accountTitle: 'Argent Bank Savings (x7242)',
-        accountBalance: '$22,144.42',
-        accountDescription: "Steve's Available Balance",
-        accountTransactions: [
+        transactions: [
           {
-            id: 1,
+            transactionId: 1,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -296,7 +330,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 2,
+            transactionId: 2,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -306,7 +340,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 3,
+            transactionId: 3,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -316,7 +350,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 4,
+            transactionId: 4,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -326,7 +360,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 5,
+            transactionId: 5,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -336,7 +370,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 6,
+            transactionId: 6,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -349,12 +383,9 @@ export const accountsOverviewData = [
       },
       {
         accountId: 7243,
-        accountTitle: 'Argent Bank Credit Card (x7243)',
-        accountBalance: '$599.00',
-        accountDescription: "Steve's Available Balance",
-        accountTransactions: [
+        transactions: [
           {
-            id: 1,
+            transactionId: 1,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -364,7 +395,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 2,
+            transactionId: 2,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -374,7 +405,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 3,
+            transactionId: 3,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -384,7 +415,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 4,
+            transactionId: 4,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -394,7 +425,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 5,
+            transactionId: 5,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -404,7 +435,7 @@ export const accountsOverviewData = [
             notes: 'notes'
           },
           {
-            id: 6,
+            transactionId: 6,
             date: 'June 20th, 2020',
             description: 'Golden Sun Bakery',
             amount: 5.45,
@@ -417,5 +448,6 @@ export const accountsOverviewData = [
       }
     ]
   }
-
 ]
+
+export { userAccounts, userTransactions }

@@ -1,16 +1,13 @@
 // React, React router DOM
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Footer from '../components/Footer'
-import Nav from '../components/nav/Nav'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { profileSlice } from '../features/slices/profileSlice'
 import { tokenSlice } from '../features/slices/tokenSlice'
 
 // API
-import { getToken, getProfile } from '../features/api/apiCalls'
+import { getToken } from '../features/api/apiCalls'
 
 // Assets
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,21 +17,12 @@ import { storeLocalToken } from '../features/api/manageLocalToken'
 const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
   const [loading, setLoading] = useState(false)
-  const profile = useSelector(state => state.profile.value)
+  const token = useSelector(state => state.token.value)
   const serviceData = { email: userEmail, password: userPassword }
-
-  async function fetchAndStoreProfile (userToken) {
-    const getProfileResponse = await getProfile(userToken)
-    if (getProfileResponse.status === 200) {
-      const profile = getProfileResponse.body
-      dispatch(profileSlice.actions.saveProfile(profile))
-    }
-  }
 
   async function handleSubmit (e) {
     e.preventDefault()
@@ -43,21 +31,20 @@ const Login = () => {
       const token = getTokenResponse.body.token
       dispatch(tokenSlice.actions.saveToken(token))
       if (rememberMe) storeLocalToken(token)
-      await fetchAndStoreProfile(getTokenResponse.body.token)
       setLoading(!loading)
     }
   }
+
   async function handleRememberMe (e) {
     setRememberMe(!rememberMe)
   }
 
   useEffect(() => {
-    if (profile) navigate('../dashboard')
+    if (token) navigate('../dashboard')
   }, [loading])
 
   return (
     <>
-      {<Nav />}
       <main className='bg-dark'>
         <section className='sign-in-content'>
         {<FontAwesomeIcon icon={faCircleUser} />}
@@ -79,7 +66,6 @@ const Login = () => {
         </form>
         </section>
       </main>
-      {<Footer />}
     </>
   )
 }

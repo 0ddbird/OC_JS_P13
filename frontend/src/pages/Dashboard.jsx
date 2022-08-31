@@ -1,31 +1,42 @@
 // React, React router DOM
-import React, { useState } from 'react'
-import AccountsOverview from '../components/AccountsOverview'
-import Footer from '../components/Footer'
-import Nav from '../components/nav/Nav'
+import React, { useEffect, useState } from 'react'
+import Accounts from '../components/Accounts'
+import Loader from '../components/Loader'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { profileSlice } from '../features/slices/profileSlice'
 
 // API
-import { updateProfile } from '../features/api/apiCalls'
+import { getProfile, updateProfile } from '../features/api/apiCalls'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const token = useSelector(state => state.token.value) // can be undefined or string
-  const profile = useSelector(state => state.profile.value) // can be undefined or string
+  const token = useSelector(state => state.token.value)
+  const profile = useSelector(state => state.profile.value)
+  const [loading, setLoading] = useState(true)
   const [editOn, setEditOn] = useState(false)
-  const [editedFirstName, setFirstName] = useState(profile.firstName) // can be undefinde or string
-  const [editedLastName, setLastName] = useState(profile.lastName) // can be undefined or string
-  const editedUserNames = { firstName: editedFirstName, lastName: editedLastName } // can be an object with undefined values or string values
+  const [editedFirstName, setFirstName] = useState('')
+  const [editedLastName, setLastName] = useState('')
+  const editedUserNames = { firstName: editedFirstName, lastName: editedLastName }
 
   function handleEdit () {
+    setFirstName(profile.firstName)
+    setLastName(profile.lastName)
     setEditOn(true)
   }
 
   function handleEditCancel () {
     setEditOn(false)
+  }
+
+  async function fetchAndStoreProfile (userToken) {
+    if (!userToken) return
+    const getProfileResponse = await getProfile(userToken)
+    if (getProfileResponse.status === 200) {
+      const profile = getProfileResponse.body
+      dispatch(profileSlice.actions.saveProfile(profile))
+    }
   }
 
   async function handleEditSubmit (e) {
@@ -48,9 +59,20 @@ const Dashboard = () => {
       console.error("ERR : Couldn't edit name")
     }
   }
-  return (
-      <>
-        {<Nav />}
+  useEffect(() => {
+    (async () => {
+      await fetchAndStoreProfile(token)
+    })()
+    setLoading(!loading)
+  }, [token])
+
+  return loading
+    ? (
+      <Loader />
+      )
+    : (
+    <>
+        { profile &&
         <main className="bg-dark">
           <header className='dashboard-header'>
           {!editOn && <h1 className='dashboard-header_h1'>Welcome back {`${profile.firstName}`} <br/> {`${profile.lastName}`}</h1>}
@@ -60,11 +82,11 @@ const Dashboard = () => {
           {editOn && <button className='profile-save' onClick={(e) => handleEditSubmit(e)}>Save</button>}
           {editOn && <button className='profile-cancel' onClick={handleEditCancel}>Cancel</button>}
           </header>
-          {<AccountsOverview id={profile.id}/>}
+          {<Accounts userId={profile.id}/>}
         </main>
-        {<Footer />}
+        }
       </>
-  )
+      )
 }
 
 export default Dashboard

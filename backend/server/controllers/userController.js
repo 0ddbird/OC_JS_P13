@@ -25,6 +25,14 @@ module.exports.loginUser = async (req, res) => {
     response.status = 200
     response.message = 'User successfully logged in'
     response.body = responseFromService
+    
+    if (req.body.setCookie) {
+      const token = response.body.token
+      const tokenFragment = token.slice(0, token.length / 2)
+      console.log(req.body.setCookie, tokenFragment)
+      response.cookie('argentBankTokenFragment',tokenFragment, {httpOnly: true})
+      console.log('cookie created')
+    }
   } catch (error) {
     console.error('Error in loginUser (userController.js)')
     response.status = 400
