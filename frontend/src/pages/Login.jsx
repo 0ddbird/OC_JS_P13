@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { tokenSlice } from '../features/slices/tokenSlice'
+import { tokenSlice } from '../app/slices/tokenSlice'
 
 // API
-import { getToken } from '../features/api/apiCalls'
+import { getToken } from '../app/api/apiCalls'
 
 // Assets
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
-import { storeLocalToken } from '../features/api/manageLocalToken'
+import { storeLocalToken } from '../app/api/manageLocalToken'
 
 const Login = () => {
   const dispatch = useDispatch()

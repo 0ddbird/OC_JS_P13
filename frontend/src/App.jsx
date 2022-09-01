@@ -1,6 +1,8 @@
 // React, React router DOM
 import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+// React components
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
@@ -10,15 +12,15 @@ import Footer from './components/Footer'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { tokenSlice } from './features/slices/tokenSlice'
-import { profileSlice } from './features/slices/profileSlice'
-// import { accountsSlice } from './features/slices/accountsSlice'
-import { getProfile } from './features/api/apiCalls'
+import { tokenSlice } from './app/slices/tokenSlice'
+import { profileSlice } from './app/slices/profileSlice'
+
+// API calls
+import { getProfile } from './app/api/apiCalls'
 
 function App () {
   const dispatch = useDispatch()
   const token = useSelector(state => state.token.value)
-  // const profile = useSelector(state => state.profile.value)
 
   async function fetchAndDispatchProfile (userToken) {
     const getProfileResponse = await getProfile(userToken)
@@ -27,14 +29,6 @@ function App () {
       dispatch(profileSlice.actions.saveProfile(profile))
     }
   }
-
-  /*   async function fetchAndDispatchAccounts (userId) {
-    const getAccountsResponse = await getMockedAccounts(userId)
-    if (getAccountsResponse.status === 200) {
-      const accounts = getAccountsResponse.body
-      dispatch(accountsSlice.actions.saveAccounts(accounts))
-    }
-  } */
 
   async function resumeSession () {
     if (window.localStorage.argentBankToken && document.cookie) {
@@ -49,10 +43,7 @@ function App () {
       }
       const token = localStorageToken + cookieToken
       dispatch(tokenSlice.actions.saveToken(token))
-      if (token) {
-        await fetchAndDispatchProfile(token)
-        // await fetchAndDispatchAccounts(profile.id)
-      }
+      if (token) await fetchAndDispatchProfile(token)
     }
   }
 

@@ -5,10 +5,10 @@ import { NavLink } from 'react-router-dom'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { accountsSlice } from '../features/slices/accountsSlice'
+import { accountsSlice } from '../app/slices/accountsSlice'
 
 // Features
-import { getMockedAccounts } from '../features/api/apiCalls'
+import { getMockedAccounts } from '../app/api/apiCalls'
 import { v4 as uuidv4 } from 'uuid'
 
 const AccountsOverview = ({ userId }) => {

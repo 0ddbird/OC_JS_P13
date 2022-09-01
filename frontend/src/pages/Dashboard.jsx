@@ -5,10 +5,10 @@ import Loader from '../components/Loader'
 
 // Redux
 import { useSelector, useDispatch } from 'react-redux'
-import { profileSlice } from '../features/slices/profileSlice'
+import { profileSlice } from '../app/slices/profileSlice'
 
 // API
-import { getProfile, updateProfile } from '../features/api/apiCalls'
+import { updateProfile } from '../app/api/apiCalls'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -28,15 +28,6 @@ const Dashboard = () => {
 
   function handleEditCancel () {
     setEditOn(false)
-  }
-
-  async function fetchAndStoreProfile (userToken) {
-    if (!userToken) return
-    const getProfileResponse = await getProfile(userToken)
-    if (getProfileResponse.status === 200) {
-      const profile = getProfileResponse.body
-      dispatch(profileSlice.actions.saveProfile(profile))
-    }
   }
 
   async function handleEditSubmit (e) {
@@ -59,12 +50,11 @@ const Dashboard = () => {
       console.error("ERR : Couldn't edit name")
     }
   }
+
   useEffect(() => {
-    (async () => {
-      await fetchAndStoreProfile(token)
-    })()
-    setLoading(!loading)
-  }, [token])
+    if (!profile) return
+    setLoading(false)
+  }, [profile])
 
   return loading
     ? (

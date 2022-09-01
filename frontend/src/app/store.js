@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import profileReducer from '../features/slices/profileSlice'
-import tokenReducer from '../features/slices/tokenSlice'
-import accountReducer from '../features/slices/accountsSlice'
+import profileReducer from '../app/slices/profileSlice'
+import tokenReducer from '../app/slices/tokenSlice'
+import accountReducer from '../app/slices/accountsSlice'
 
 export default configureStore({
   reducer: {

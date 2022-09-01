@@ -70,6 +70,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -93,6 +94,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - in: body
           name: body
           description: Update user profile attributes
@@ -111,7 +113,7 @@ paths:
         '500':
           description: Internal Server Error
   /user/accounts:
-    post:
+    get:
       security:
         - Bearer: []
       tags:
@@ -123,6 +125,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -139,13 +142,14 @@ paths:
         - Bearer: []
       tags:
         - User Module
-      summary: User Accounts API
+      summary: A CHANGER - PUT Transactions
       description: API for updating a user profile
       parameters:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - in: body
           name: body
           description: Update user accounts attributes
@@ -163,7 +167,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/account/transactions:
+  /user/accounts/:id/transactions:
     post:
       security:
         - Bearer: []
@@ -176,6 +180,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - in: body
           name: body
           description: Attach User account ID

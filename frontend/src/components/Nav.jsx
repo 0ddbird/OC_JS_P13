@@ -7,10 +7,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import Logo from '../assets/argentBankLogo.png'
 
 // Features
-import { tokenSlice } from '../features/slices/tokenSlice'
-import { profileSlice } from '../features/slices/profileSlice'
-import { accountsSlice } from '../features/slices/accountsSlice'
-import { deleteLocalToken } from '../features/api/manageLocalToken'
+import { tokenSlice } from '../app/slices/tokenSlice'
+import { profileSlice } from '../app/slices/profileSlice'
+import { accountsSlice } from '../app/slices/accountsSlice'
+import { deleteLocalToken } from '../app/api/manageLocalToken'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'

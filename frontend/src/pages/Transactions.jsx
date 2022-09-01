@@ -3,29 +3,46 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
+import Loader from '../components/Loader'
 import Transaction from '../components/Transaction'
-import { getMockedTransactions } from '../features/api/apiCalls'
+import { getMockedTransactions, getMockedAccounts } from '../app/api/apiCalls'
 
 const AccountTransactions = () => {
   const { id } = useParams()
   const accountId = parseInt(id)
-  const accounts = useSelector(state => state.accounts.value)
-  const account = accounts.find(account => account.accountId === accountId)
 
   const profile = useSelector(state => state.profile.value)
-  const userId = profile.id
+  const userId = profile?.id
 
-  const [transactions, setTransactions] = useState('')
+  const [transactions, setTransactions] = useState(undefined)
+  const [loading, setLoading] = useState(true)
+  const [account, setAccount] = useState(undefined)
 
   useEffect(() => {
-    async function fetchAndStoreTransactions (userId, accountId) {
-      const fetchTransactionsResponse = await getMockedTransactions(userId, accountId)
-      setTransactions(fetchTransactionsResponse)
-    }
-    fetchAndStoreTransactions(userId, accountId)
-  }, [transactions])
+    if (!profile) return
+    (async () => {
+      async function fetchAndDispatchAccounts (userId) {
+        const userAccounts = await getMockedAccounts(userId)
 
-  return (
+        const currentAccount = userAccounts.accounts.find(account => account.accountId === accountId)
+        setAccount(currentAccount)
+      }
+
+      async function fetchAndDispatchTransactions (userId, accountId) {
+        const fetchTransactionsResponse = await getMockedTransactions(userId, accountId)
+        setTransactions(fetchTransactionsResponse)
+      }
+      await fetchAndDispatchAccounts(userId)
+      await fetchAndDispatchTransactions(userId, accountId)
+      setLoading(false)
+    }
+
+    )()
+  }, [profile])
+
+  return loading
+    ? <Loader />
+    : (
     <>
       <div className="account-transactions">
         <div className="account-transactions__header bg-dark">
@@ -60,7 +77,7 @@ const AccountTransactions = () => {
         </div>
       </div>
     </>
-  )
+      )
 }
 
 // <TransactionsBoard accountTransactions={accountDetails.accountTransactions}/>

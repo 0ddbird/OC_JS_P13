@@ -1,3 +1,8 @@
+# Mon titre
+## Titre de niveau 2
+
+[titre du lien](http://url.com)
+
 ---
 name: '#1 Landing Page'
 about: Issue for the landing page requirement
@@ -74,7 +79,15 @@ title: User can update their profile
 
 A user should be able to:
 
-- [x] Edit their profile (first name and last name). 
+- [x] Edit their profile (first name and last name).
 - [x] This data should be persisted to the database.
 
 For more information on accessing the design assets, see the [Design Assets section in the README](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API#design-assets).
+
+
+1. Front : React + Typescript + Sass + Eslint
+2. Front : React + Typescript + Redux + Sass + Eslint
+3. Back : Typescript + Node + Express + Eslint
+
+gh clone front
+gh clone back
