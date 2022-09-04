@@ -85,9 +85,4 @@ A user should be able to:
 For more information on accessing the design assets, see the [Design Assets section in the README](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API#design-assets).
 
 
-1. Front : React + Typescript + Sass + Eslint
-2. Front : React + Typescript + Redux + Sass + Eslint
-3. Back : Typescript + Node + Express + Eslint
-
-gh clone front
-gh clone back
+[Diagramme](https://whimsical.com/p13-argentbank-UA4DHcxfiPnT2KLcr4ySxx@2Ux7TurymMeHu9yD8SV3)
