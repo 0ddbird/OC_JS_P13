@@ -58,7 +58,7 @@ paths:
         '500':
           description: Internal Server Error
   /user/profile:
-    get:
+    post:
       security:
         - Bearer: []
       tags:
@@ -180,7 +180,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Current month user transactions retrieved successully
+          description: User transactions retrieved successully
           schema:
             $ref: '#/definitions/UserTransactions'
         '400':
@@ -241,7 +241,7 @@ paths:
         - application/json
       responses:
         '204':
-          description: User transaction updated successully
+          description: User transaction retrieved successully
           schema:
             $ref: '#/definitions/Transaction'
         '400':
