@@ -43,8 +43,8 @@ function App () {
       }
       const token = localStorageToken + cookieToken
       dispatch(tokenSlice.actions.saveToken(token))
-      if (token) await fetchAndDispatchProfile(token)
     }
+    if (token) await fetchAndDispatchProfile(token)
   }
 
   useEffect(() => {
